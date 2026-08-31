@@ -23,26 +23,29 @@ def test_each_file(data_file):
 
 
 # TODO №3
-NAMES = ["Иван", "Ольга"]
-SURNAMES = ["Иванов", "Петрова"]
-AGES = [17, 18, 35]
 
-
-def id_name(name: str) -> str:
-    return f"name={name}"
-
-
-def id_surname(surname: str) -> str:
-    return f"surname={surname}"
-
-
-def id_age(age: int) -> str:
-    return f"age={age}"
-
-
-@pytest.mark.parametrize("name", NAMES, ids=id_name)
-@pytest.mark.parametrize("surname", SURNAMES, ids=id_surname)
-@pytest.mark.parametrize("age", AGES, ids=id_age)
+@pytest.mark.parametrize(
+    "name",
+    [
+        pytest.param("Иван", id="name=Иван"),
+        pytest.param("Ольга", id="name=Ольга"),
+    ],
+)
+@pytest.mark.parametrize(
+    "surname",
+    [
+        pytest.param("Иванов", id="surname=Иванов"),
+        pytest.param("Петрова", id="surname=Петрова"),
+    ],
+)
+@pytest.mark.parametrize(
+    "age",
+    [
+        pytest.param(27, id="age=27"),
+        pytest.param(18, id="age=18"),
+        pytest.param(35, id="age=35"),
+    ],
+)
 def test_registration_form(name, surname, age):
     assert isinstance(name, str)
     assert len(name) > 0
